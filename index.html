@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Gabi</title>
+
+<link type="text/css" rel="stylesheet" href="./index_files/default.css">
+<script type="text/javascript" src="./index_files/jquery.min.js"></script>
+<script type="text/javascript" src="./index_files/jscex.min.js"></script>
+<script type="text/javascript" src="./index_files/jscex-parser.js"></script>
+<script type="text/javascript" src="./index_files/jscex-jit.js"></script>
+<script type="text/javascript" src="./index_files/jscex-builderbase.min.js"></script>
+<script type="text/javascript" src="./index_files/jscex-async.min.js"></script>
+<script type="text/javascript" src="./index_files/jscex-async-powerpack.min.js"></script>
+<script type="text/javascript" src="./index_files/functions.js" charset="utf-8"></script>
+<script type="text/javascript" src="./index_files/love.js" charset="utf-8"></script>
+<script type="text/javascript" src="./config.js"></script>
+
+<style type="text/css">
+body { margin: 0; padding: 0; overflow: hidden; background: rgb(243, 213, 193); }
+
+#main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+    /* --- TEXT LAYER (TOP) --- */
+    #text {
+        position: absolute;
+        top: 5%; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        text-align: center;
+        z-index: 500;
+    }
+    .say {
+        font-family: 'Arial', sans-serif;
+        font-weight: bold;
+        color: #333;
+        font-size: 22px; 
+        line-height: 1.4; 
+        display: block;
+        margin-bottom: 8px; 
+        text-shadow: 0 0 10px rgba(255,255,255, 0.9); 
+    }
+
+    /* --- CLOCK LAYER --- */
+    #clock-box {
+        position: absolute;
+        top: 88%; 
+        left: 15px; 
+        z-index: 500;
+        text-align: left; 
+        background: none; 
+        box-shadow: none;
+        padding: 0;
+        transform: translate(0, -50%); 
+    }
+    .STYLE1 { color: #666; font-weight: bold; }
+    #clock-box-inside-text { font-size: 16px; font-family: 'Arial', sans-serif; text-shadow: 1px 1px 2px white; }
+    #clock .digit { font-size: 26px; font-weight: bold; font-family: 'Arial', sans-serif;}
+    #clock { font-size: 14px; font-family: 'Arial', sans-serif; margin-top: 5px; text-shadow: 1px 1px 2px white; }
+
+    /* --- CIRCULAR REDIRECT BUTTON --- */
+    #redirect-btn {
+        position: fixed;
+        
+        /* --- LOCATION SETTINGS (DESKTOP) --- */
+        bottom: 15%; 
+        left: 50%;   
+        transform: translateX(-50%);
+        
+        z-index: 10000;
+        display: none; /* CRITICAL: Must be none initially */
+        
+        width: 150px;  
+        height: 150px; 
+        border-radius: 50%; 
+        
+        background-color: #ffcace;
+        color: #d6336c;
+        border: 4px solid #fff;
+        
+        /* Flex properties for centering text (Applied via JS on show) */
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+        font-family: 'Arial', sans-serif;
+        font-size: 18px; 
+        font-weight: bold;
+        line-height: 1.2;
+        box-shadow: 0 4px 20px rgba(255, 105, 180, 0.6);
+        cursor: pointer;
+        animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateX(-50%) translateY(0px); }
+        50% { transform: translateX(-50%) translateY(-10px); }
+        100% { transform: translateX(-50%) translateY(0px); }
+    }
+
+    /* --- ANIMATED GIF STYLING --- */
+    #running-gif {
+        position: absolute;
+        bottom: 0px; 
+        left: 10px;   
+        width: 260px; 
+        z-index: 400; 
+        opacity: 1;
+        display: none; /* Hidden initially */
+        
+        animation: runStop 1s linear forwards; 
+    }
+
+    @keyframes runStop {
+        0% { left: 10px; }
+        100% { left: 100px; }
+    }
+
+    /* --- TREE LAYER --- */
+    #wrap {
+        position: absolute;
+        bottom: 0; 
+        left: 50%;
+        margin-left: -550px; 
+        transform-origin: 50% 100%;
+        z-index: 100;
+    }
+
+    /* --- MOBILE ADJUSTMENTS --- */
+    @media screen and (max-width: 600px) {
+        .say { 
+            font-size: 17px !important; 
+            margin-bottom: 8px !important; 
+        }
+        #clock-box { 
+            left: 10px !important;   
+            bottom: 40px !important; 
+            top: auto !important;
+            transform: none !important;
+            width: auto !important;
+        }
+        #start-hint { top: 40% !important; }
+        
+        #redirect-btn {
+            /* --- LOCATION SETTINGS (MOBILE) --- */
+            left: 20% !important;        
+            bottom: 25% !important; 
+            
+            transform: translateX(-50%) !important;  
+            width: 120px !important;
+            height: 120px !important;
+            font-size: 15px !important;
+            
+            animation: floatMobile 2s infinite ease-in-out !important;
+        }
+
+        /* GIF Mobile Adjustments */
+        #running-gif {
+            width: 180px !important;
+            bottom: 0px !important;
+        }
+    }
+
+    @keyframes floatMobile {
+        0% { transform: translateX(-50%) translateY(0px); }
+        50% { transform: translateX(-50%) translateY(-10px); }
+        100% { transform: translateX(-50%) translateY(0px); }
+    }
+
+    #start-hint {
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+        color: #ff69b4;
+        font-weight: bold;
+        z-index: 10000;
+        pointer-events: none;
+        animation: pulse 1.2s infinite;
+        text-shadow: 2px 2px 4px #fff;
+        width: 100%;
+        text-align: center;
+    }
+    @keyframes pulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+        50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    }
+</style>
+</head>
+<body>
+<img src="https://ajlovechina.github.io/loveBalloon/static/music.png" style="position: fixed;z-index: 100001;top:10px;right:10px;cursor:pointer; width: 40px;" onclick="toggleAudio(this)">
+<audio id="bg-music" class="song-audio-autoplay" controls loop style="display: none;visibility: hidden">
+    <source src="./index_files/music.mp3" type="audio/mp3"/>
+</audio>
+<script>
+    function toggleAudio(img) {
+        var audio = document.getElementById('bg-music');
+        if (audio.paused) {
+            audio.play();
+            img.className = 'rotateImages';
+        } else {
+            audio.pause();
+            img.className = '';
+        }
+    }
+    
+    // FUNCTION TO REDIRECT
+    function goToWishes() {
+        window.location.href = "https://happy-bday-gabi-iloveu-1094120362250.us-west1.run.app";
+    }
+</script>
+<style type="text/css">
+    .rotateImages{ -webkit-animation:myRotate 10s linear infinite; animation:myRotate 10s linear infinite; }
+    @keyframes myRotate{ 0%{ transform: rotate(0deg);} 50%{ transform: rotate(180deg);} 100%{ transform: rotate(360deg);} }
+</style>
+<div id="main">
+    <div id="start-hint"></div>
+    <div id="error">This page uses HTML5. Please use Google Chrome or Firefox.</div>
+
+<div id="text">
+    <div id="code"></div>
+</div>
+
+<!-- The Circular Redirect Button -->
+<div id="redirect-btn" onclick="goToWishes()">
+    Click me<br>for<br>Surprise 🎁
+</div>
+
+<!-- The Running GIF -->
+<img id="running-gif" src="https://i.im.ge/2026/01/03/BnJrEy.ezgif-com-animated-gif-maker.gif" alt="Running to tree">
+
+<div id="wrap">
+    <canvas id="canvas" width="1100" height="680"></canvas>
+</div>
+
+<div id="clock-box">
+    <span id="clock-box-inside-text"></span>
+    <div id="clock"></div>
+</div>
+</div>
+<script type="text/javascript">
+    $.fn.typewriter = function() {
+            this.each(function() {
+                var $ele = $(this), str = $ele.html(), progress = 0;
+                $ele.html('');
+                var timer = setInterval(function() {
+                    var current = str.substr(progress, 1);
+                    if (current == '<') progress = str.indexOf('>', progress) + 1;
+                    else progress++;
+                    $ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
+                    if (progress >= str.length) clearInterval(timer);
+                }, 40); // <--- This 25 makes it fast!
+            });
+            return this;
+        };
+    $('#code').html(config.lines.map(item => {
+        return `<span class="say">${item}</span><br>`
+    }).reduce((a, b) => { return a + b; }));
+
+    $("#clock-box-inside-text").html(`
+        <span class="STYLE1">${config.names[0]}</span> 
+        ${config.names[1]}! 
+        <br>
+        <span class="STYLE1">Lighting up the world for:</span>
+    `);
+</script>
+<script>
+    (function () {
+        var canvas = $('#canvas');
+        var width = 1100;
+        var height = 680;
+
+        canvas.attr("width", width);
+        canvas.attr("height", height);
+
+        window.timeElapse = function(date){
+            var current = Date.parse(new Date());
+            var seconds = (current - Date.parse(date)) / 1000;
+            var days = Math.floor(seconds / (3600 * 24));
+            seconds = seconds % (3600 * 24);
+            var hours = Math.floor(seconds / 3600);
+            if (hours < 10) { hours = "0" + hours; }
+            seconds = seconds % 3600;
+            var minutes = Math.floor(seconds / 60);
+            if (minutes < 10) { minutes = "0" + minutes; }
+            seconds = seconds % 60;
+            if (seconds < 10) { seconds = "0" + Math.round(seconds); } else { seconds = Math.round(seconds); }
+            
+            var result = "<span class=\"digit\">" + days + "</span> days <span class=\"digit\">" + hours + "</span> hrs <span class=\"digit\">" + minutes + "</span> min <span class=\"digit\">" + seconds + "</span> sec"; 
+            $("#clock").html(result);
+        }
+
+        function resizeLayout() {
+            var clientWidth = document.documentElement.clientWidth;
+            var scale = clientWidth / 1100;
+
+            if (clientWidth < 768) {
+                var virtualWidth = 550; 
+                scale = clientWidth / virtualWidth;
+            } else {
+                if (scale > 1) scale = 1;
+            }
+
+            $('#wrap').css({
+                'transform': 'scale(' + scale + ')',
+            });
+        }
+        
+        window.onresize = resizeLayout;
+        resizeLayout(); 
+
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
+
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2.3
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]]
+            ],
+            bloom: {
+                num: 700, 
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
+            }
+        }
+
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
+
+        function startAnimation(e) {
+            if (hold) {
+                $('#start-hint').fadeOut();
+                var audio = document.getElementById('bg-music');
+                audio.play().catch(function(e){ console.log("Audio play blocked"); });
+                document.querySelector('img[src*="music"]').className = 'rotateImages';
+                hold = 0;
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
+            }
+        }
+
+        canvas.click(startAnimation);
+        $('#wrap').click(startAnimation);
+        $('#main').click(startAnimation);
+        $('#text').click(startAnimation);
+
+        canvas.mousemove(function (e) {
+            var offset = canvas.offset(), x, y;
+            var scale = 1;
+            if ($('#wrap').css('transform') && $('#wrap').css('transform') !== 'none') {
+                 var matrix = $('#wrap').css('transform').match(/-?[\d\.]+/g);
+                 if(matrix && matrix[0]) scale = parseFloat(matrix[0]);
+            }
+            x = (e.pageX - offset.left) / scale;
+            y = (e.pageY - offset.top) / scale;
+            canvas.toggleClass('hand', seed.hover(x, y));
+        });
+
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            try {
+                canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+                canvas.css("background", "#ffe");
+                $await(Jscex.Async.sleep(300));
+                canvas.css("background", "none");
+            } catch(e) {}
+        }));
+
+        var jumpAnimate = eval(Jscex.compile("async", function () {
+            var ctx = tree.ctx;
+            while (true) {
+                tree.ctx.clearRect(0, 0, width, height);
+                tree.jump();
+                foot.draw();
+                $await(Jscex.Async.sleep(25));
+            }
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+            var together = new Date(config.date);
+
+            $("#code").show().typewriter();
+            $("#clock-box").fadeIn(500);
+            while (true) {
+                timeElapse(together);
+                $await(Jscex.Async.sleep(1000));
+            }
+        }));
+
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            
+            // --- TIMERS START HERE (AFTER HEART MOVES) ---
+            
+            // 1. Show GIF after 5 seconds
+            setTimeout(function() {
+                var $gif = $("#running-gif");
+                $gif.fadeIn(500);
+                var src = $gif.attr("src");
+                $gif.attr("src", "");
+                $gif.attr("src", src);
+            }, 7000);
+
+            // 2. Show Surprise Button after 7 seconds
+            setTimeout(function() {
+                // We use .css("display", "flex") to ensure the text centers correctly when it appears
+                $("#redirect-btn").css("display", "flex").hide().fadeIn(1000);
+            }, 7000); 
+
+            $await(growAnimate());
+            $await(flowAnimate()); 
+            $await(moveAnimate());
+            textAnimate().start();
+            $await(jumpAnimate());
+        }));
+
+        runAsync().start();
+    })();
+</script>
+</body>
+</html>
